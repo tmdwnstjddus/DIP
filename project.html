@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>프로젝트</title>
+
+    <link rel="stylesheet" href="./style/project.css">
+    <link rel="stylesheet" href="./style/init.css">
+    <link rel="stylesheet" href="./style/font.css">
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./script/library/dip.js"></script>
+    <script src="./script/library/dip-component.js"></script>
+    <script src="./script/library/dip-project.js"></script>
+    <script src="./script/library/dip-hierarchy.js"></script>
+    <script src="./script/library/dip-dips.js"></script>
+  </head>
+
+  <script>
+    $(document).ready(function() {
+      $(".ProjectCreate").click(function() {
+        $(".CreateForm").slideToggle();
+      });
+
+      $("#openMask").click(function(e){
+          e.preventDefault();
+          wrapWindowByMask();
+      });
+
+      $(".window .close").click(function (e) {
+          e.preventDefault();
+          $("#mask, .modify").hide();
+      });
+
+      $("#mask").click(function () {
+          $(this).hide();
+          $(".modify").hide();
+      });
+    });
+
+    function ObjectPost() {
+      $(".CreateForm").slideUp();
+    }
+
+    function wrapWindowByMask(){
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        $("#mask").css({"width":maskWidth,"height":maskHeight});
+        $("#mask").fadeIn(0);
+        $("#mask").fadeTo("slow",0.6);
+        $(".modify").show();
+    }
+  </script>
+
+  <body>
+    <div class="upper_line"></div>
+    <!--logo-->
+    <div class="logo">
+      <a href="./index.html"><img class="logo_dip" src="./img/DIP_LOGO.png"></a>
+    </div>
+
+    <!--headContainer-->
+    <div class="headContainer">
+      <div class="headContainer_contents">
+        <h2>안녕하세요.</h2>
+        <h2>프로젝트를 생성해 볼까요?</h2>
+      </div>
+    </div>
+
+    <!--mainContainer-->
+    <div class="mainContainer">
+      <button class="ProjectCreate" type="button" name="button">프로젝트 생성</button>
+      <form class="CreateForm" hidden>
+        <input type="text" class="ProjectName" name="ProjectName" value="">
+        <button type="button" name="button" onclick="ObjectPost()">CREATE</button>
+      </form>
+
+      <div class="mainContainer_contents">
+        <div id="mask"></div>
+            <div class="modify">
+              <form>
+                <input type="hidden" class="ProjectIdInput" name="ProjectIdInput" value="<?=$data[ProjectID]?>">
+                <input class="ProjectNameInput" name="ProjectNameInput" type="text" value="">
+                <button class="td_btn" type="button" name="button" onclick="ProjectNameChange()">MODIFY</button>
+              </form>
+            </div>
+        <div class="table_layout">
+            <table class="table_content" order="1">
+                <tr class="table_attribute">
+                  <td>프로젝트 이름</td>
+                  <td>수정</td>
+                  <td>편집</td>
+                </tr>
+                <tr class="table_tr">
+                  <td>Untitled</td>
+                  <td><button id="openMask" class="td_btn" type="button" name="button" onclick="">MODIFY</button></td>
+                  <td><button class="td_btn" type="button" name="button" onclick="location.href='./template.html'">EDIT</button></td>
+                </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
